@@ -1,0 +1,2 @@
+# giphyWidget
+Giphy homework assignment.
