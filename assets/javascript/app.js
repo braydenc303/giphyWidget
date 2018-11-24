@@ -39,12 +39,16 @@ $("header").on("click", "button", function() {
             foodDiv.attr("class", "category");
             var p = $("<p>").text("Rating: " + results[i].rating);
             var foodImage = $("<img>");
+            // I attempted to add a link to download the gif, but it was causing some really strange functionality.
+            // var download = $("<a href = '" + results[i].images.fixed_height.url + "' download>");
+            // download.text("Download");
             foodImage.attr("src", results[i].images.fixed_height_still.url);
             foodImage.attr("data-still",  results[i].images.fixed_height_still.url);
             foodImage.attr("data-animate",  results[i].images.fixed_height.url);
             foodImage.attr("data-state", "still");
             foodImage.attr("class", "gif");
             foodDiv.append(foodImage);
+            // foodDiv.append(download);
             // 5. Under every gif, display its rating (PG, G, so on).
             foodDiv.append(p);
             $("#gifContainer").prepend(foodDiv);
@@ -77,4 +81,5 @@ $("#addFavorite").on("click", function(event) {
     var food = $("#addCategory").val().trim();
     junkFood.push(food);
     makeButtons();
+    $("#addCategory").val("");
 });
