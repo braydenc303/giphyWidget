@@ -3,7 +3,7 @@ body {
 
 }
 
-button, #addFavorite { 
+button, #addFavorite, #addTen { 
         /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d4e4ef+0,86aecc+100;Grey+Gloss */
     background: #d4e4ef; /* Old browsers */
     background: -moz-linear-gradient(top, #d4e4ef 0%, #86aecc 100%); /* FF3.6-15 */

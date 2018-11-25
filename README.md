@@ -1,3 +1,9 @@
+For this assignment, I created a widget that makes a call to the GIPHY API to populates the webpage with gifs at a time in different categories of junk food. I also included a field where the user can add their favorite. I limited results to a rating of PG.
+
+I attempted to include a link that would allow the user to download the gif to their device, but was unable to get that functionality to work properly, and it simply opened the gif in a new window, so I have commented that out for now, and may come back to try adding that feature in the future.
+
+The specifications of the assignment are below:
+
 # giphyWidget
 Giphy homework assignment.
 

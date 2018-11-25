@@ -1,3 +1,6 @@
+var queryURL = "";
+var offset;
+
 // 1. Before you can make any part of our site work, you need to create an array of strings, 
 // each one related to a topic that interests you. Save it to a variable called `topics`.
 //    * We chose animals for our theme, but you can make a list to your own liking.
@@ -19,20 +22,15 @@ function makeButtons() {
     }
 }
 
-// 3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and 
-// place them on the page.
-$("header").on("click", "button", function() {
-    var category = $(this).attr("data-category");
-    // console.log(category);
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + category + "&api_key=STrsqiGUC2AsGFAUFLvmOUAMxcdUUt6a&limit=10&rating=pg";
-    // console.log(queryURL);
-
+function addGifs() {
+    
     $.ajax({
         url: queryURL,
         method: "GET"
     })
 
     .then(function(response){
+        console.log(response);
         var results = response.data;
         for(var i = 0; i < results.length; i++) {
             var foodDiv = $("<div>");
@@ -40,20 +38,61 @@ $("header").on("click", "button", function() {
             var p = $("<p>").text("Rating: " + results[i].rating);
             var foodImage = $("<img>");
             // I attempted to add a link to download the gif, but it was causing some really strange functionality.
-            // var download = $("<a href = '" + results[i].images.fixed_height.url + "' download>");
-            // download.text("Download");
+            // var download = $("<a href = '" + results[i].images.fixed_height.url + "' download>").text("Download");
             foodImage.attr("src", results[i].images.fixed_height_still.url);
             foodImage.attr("data-still",  results[i].images.fixed_height_still.url);
             foodImage.attr("data-animate",  results[i].images.fixed_height.url);
             foodImage.attr("data-state", "still");
             foodImage.attr("class", "gif");
             foodDiv.append(foodImage);
-            // foodDiv.append(download);
             // 5. Under every gif, display its rating (PG, G, so on).
             foodDiv.append(p);
+            //Bonus: Include a 1-click download button for each gif, this should work across device types.
+            // foodDiv.append(download);
             $("#gifContainer").prepend(foodDiv);
         }
     });
+}
+
+// 3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and 
+// place them on the page.
+$("header").on("click", "button", function() {
+    var category = $(this).attr("data-category");
+    // console.log(category);
+    queryURL = "https://api.giphy.com/v1/gifs/search?q=" + category + "&api_key=STrsqiGUC2AsGFAUFLvmOUAMxcdUUt6a&limit=10&rating=pg";
+    // console.log(queryURL);
+
+    addGifs();
+    offset = 10;
+
+    // $.ajax({
+    //     url: queryURL,
+    //     method: "GET"
+    // })
+
+    // .then(function(response){
+    //     console.log(response);
+    //     var results = response.data;
+    //     for(var i = 0; i < results.length; i++) {
+    //         var foodDiv = $("<div>");
+    //         foodDiv.attr("class", "category");
+    //         var p = $("<p>").text("Rating: " + results[i].rating);
+    //         var foodImage = $("<img>");
+    //         // I attempted to add a link to download the gif, but it was causing some really strange functionality.
+    //         // var download = $("<a href = '" + results[i].images.fixed_height.url + "' download>").text("Download");
+    //         foodImage.attr("src", results[i].images.fixed_height_still.url);
+    //         foodImage.attr("data-still",  results[i].images.fixed_height_still.url);
+    //         foodImage.attr("data-animate",  results[i].images.fixed_height.url);
+    //         foodImage.attr("data-state", "still");
+    //         foodImage.attr("class", "gif");
+    //         foodDiv.append(foodImage);
+    //         // 5. Under every gif, display its rating (PG, G, so on).
+    //         foodDiv.append(p);
+    //         //Bonus: Include a 1-click download button for each gif, this should work across device types.
+    //         // foodDiv.append(download);
+    //         $("#gifContainer").prepend(foodDiv);
+    //     }
+    // });
 
    
 });
@@ -82,4 +121,22 @@ $("#addFavorite").on("click", function(event) {
     junkFood.push(food);
     makeButtons();
     $("#addCategory").val("");
+});
+
+//Bonus: Include a 1-click download button for each gif, this should work across device types.
+// $("#gifContainer").on("click", ".download", function() {
+
+// });
+
+
+// Bonus: Allow users to request additional gifs to be added to the page.
+//    * Each request should ADD 10 gifs to the page, NOT overwrite the existing gifs.
+
+$("#addTen").on("click", function() {
+    event.preventDefault();
+    queryURL = queryURL + "&offset=" + offset;
+    addGifs();
+    offset += 10;
+    console.log(queryURL);
+
 });
