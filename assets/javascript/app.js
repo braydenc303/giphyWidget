@@ -17,6 +17,8 @@ $(document).ready(makeButtons(junkFood));
 
 function makeButtons() {
     $("header").empty();
+    var heading = $("<h1>").text("Giphy Widget");
+    $("header").append(heading);
     for (var i = 0; i < junkFood.length; i++) {
         $("header").append("<button data-category = '" + junkFood[i] + "'>" + junkFood[i].toUpperCase() + "</button>");
     }
