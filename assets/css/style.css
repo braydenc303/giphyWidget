@@ -43,26 +43,21 @@ button, #addFavorite, #addTen {
     margin: 2px 10px;
 }
 
-header {
+header, #newCategory, #gifContainer {
     margin: 10px auto;
     width: 80%;
-}
-
-#newCategory {
-    margin: 10px auto;
-    width: 80%;
-}
-
-#gifContainer {
-    margin: 10px;
 }
 
 .category {
     display: inline-block;
-    /* margin: 10px; */
+    margin: 2px;
 }
 
 p {
     margin-bottom: 10px;
+}
+
+img {
+    border-radius: 100px;
 }
 
