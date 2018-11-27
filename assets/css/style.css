@@ -43,6 +43,11 @@ button, #addFavorite, #addTen {
     margin: 2px 10px;
 }
 
+#addCategory {
+    border-radius: 25px;
+    padding: 10px;
+}
+
 header, #newCategory, #gifContainer {
     margin: 10px auto;
     width: 80%;
