@@ -41,6 +41,10 @@ function addGifs() {
             var foodImage = $("<img>");
             // I attempted to add a link to download the gif, but it was causing some really strange functionality.
             // var download = $("<a href = '" + results[i].images.fixed_height.url + "' download>").text("Download");
+            // var download = $("<a>").text("Download");
+            // download.attr("download");
+            // download.attr("href", "data:image/gif,"+"assets/images/200.gif");
+
             foodImage.attr("src", results[i].images.fixed_height_still.url);
             foodImage.attr("data-still",  results[i].images.fixed_height_still.url);
             foodImage.attr("data-animate",  results[i].images.fixed_height.url);
